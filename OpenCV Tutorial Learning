@@ -1,0 +1,63 @@
+CHAPTER#01----->  #READ IMAGES, VIDEOS AND WEBCAM
+
+import cv2            #computerVission
+#print("package imported")
+         
+#img=cv2.imread("Resources/lena.png")
+#cv2.imshow("Output",img)
+#cv2.waitKey(0)
+    #video
+#cap=cv2.VideoCapture("Resources/test_video.mp4")
+#while True:
+ #  success, img=cap.read()
+  # cv2.imshow("Video", img)
+   #if cv2.waitKey(1) & 0xFF==ord('x'):
+    #   break
+    #webcam
+cap=cv2.VideoCapture(0)   #default webcam id
+cap.set(3,640)  #id 3 is width
+cap.set(4,480)     #id 4 is height
+cap.set(10,500)     #id 10 is for brightness
+while True:
+    success, img=cap.read()
+    cv2.imshow("Video", img)
+    if cv2.waitKey(1) & 0xFF==ord('x'):
+        break
+    <------------------------------------------------------------------------------>
+    
+    
+CHAPTER#02----------->#BASIC FUNCTION
+
+import cv2
+import numpy as np
+#BASIC FUNCTION
+
+img = cv2.imread("Resources/lena.png")
+kernal = np.ones((5,5),np.uint8)
+imgGrey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #changes the given image in desired colored forms
+imgBlur = cv2.GaussianBlur(imgGrey,(7,7),0) #image blur by gaussian method in this (7,7) should be the capacity of image which should be blured
+imgCanny = cv2.Canny(img,100,100) #edge detection 100,100(changable) is a threshold values(it means images with certain amount of images)
+imgDilation = cv2.dilate(imgCanny,kernal,iterations=1) #it is used for the edges thickness that edges which are not properly cleared so we increase the thickness as kernal i.e matrix value , tu use matrix numpy is provided and the last paramter is how much thicknesss we want
+imgErosion = cv2.erode(imgDilation,kernal,iterations=1)#it is opposite of dilation it is used for thin the image edges
+cv2.imshow("Gray Image",imgGrey)
+cv2.imshow("Blur Image",imgBlur)
+cv2.imshow("Edge Image",imgCanny)
+cv2.imshow("dilate Image",imgDilation)
+cv2.imshow("Eroded Image",imgErosion)
+cv2.waitKey(0)
+<-------------------------------------------------------------------------------------------------------------------->
+CHAPTER#03------------->#RESIZING AND CROPING
+
+import cv2
+
+img = cv2.imread("Resources/lambo.jpg")
+print(img.shape)
+imgResize = cv2.resize(img,(500,350))#in opencv first width come and then height
+imgCrop = img[100:500,200:400]
+
+cv2.imshow("Image",img)
+cv2.imshow("Resize Image",imgResize)
+cv2.imshow("Crop Image",imgCrop)
+cv2.waitKey(0)
+
+<---------------------------------------------------------------------------------------------------------------------->
